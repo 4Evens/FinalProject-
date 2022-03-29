@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 
 namespace Business.Concrete
@@ -17,14 +18,14 @@ namespace Business.Concrete
         {
             _categoryDal = categoryDal;
         }
-        public List<Category> GetAll()
+        public IDataResult<List<Category>> GetAll()
         {
-            return _categoryDal.GetAll();
+            return new SuccessDataResult<List<Category>>(_categoryDal.GetAll());
         }
 
-        public Category GeyById(int categoryId)
+        public IDataResult<Category> GeyById(int categoryId)
         {
-            return _categoryDal.Get(c => c.categoryId == categoryId);
+            return new SuccessDataResult<Category>(_categoryDal.Get(c => c.categoryId == categoryId));
         }
     }
 }
